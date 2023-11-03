@@ -1,0 +1,175 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+/* text style in each card */
+.firstName {
+    text-align: center;
+}
+
+/* Css for each card */
+.divCard {
+    border: 1px solid #000;
+    width: 200px;
+    border-radius: 15%;
+    margin: 30px;
+    font-family: myFont;
+    padding: 10px;
+    background-image: linear-gradient(10deg, #A9F1DF, #FFBBBB);
+}
+
+.divCard:hover {
+    box-shadow: 10px 10px 10px red;
+
+}
+
+/* fonts.. */
+@font-face {
+    font-family: spanFont;
+    src: url(./assets/fonts/Scary\ Zombie.ttf);
+}
+
+@font-face {
+    font-family: headerFont;
+    src: url(./assets/fonts/Scary\ Zombie.ttf);
+}
+
+@font-face {
+    font-family: myFont;
+    src: url(./assets/fonts/MetalRocker.ttf);
+}
+
+/* Css for form */
+#formDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CSS for buttons */
+.btnClass:hover {
+    background: linear-gradient(#e66465, #9198e5, white);
+    box-shadow: 3px 3px 3px red;
+    border-radius: 50%;
+    padding: 3px
+}
+
+button {
+    cursor: pointer;
+}
+
+i {
+    font-size: 23px;
+    cursor: pointer;
+
+}
+
+.btnClass {
+    padding: 3px
+}
+
+#container {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-image: url(./assets/img/5167566.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* --------------------------------------------------------------------------- */
+/* grid and flex */
+#container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 0.35fr auto 0.1fr;
+    grid-template-areas:
+        "h h h h h h h h h h h h"
+        "c c c c c c c c c c c c"
+        "f f f f f f f f f f f f";
+    /* border: 1px solid #000; */
+}
+
+#formDiv {
+    grid-area: h;
+}
+
+#cards {
+    grid-area: c;
+    height: 100%;
+
+
+}
+
+#footer {
+    grid-area: f;
+}
+
+#cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* big screen */
+@media screen and (min-width: 992px) {
+    #container {
+        display: grid;
+        min-height: 100%;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "h h h h h h h h h h h h"
+            "c c c c c c c c c c c c"
+            "f f f f f f f f f f f f";
+    }
+}
+
+/* Small screen */
+@media screen and (min-width: 250px) {
+    #container {
+        display: grid;
+        min-height: 100%;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "h h h h h h h h h h h h"
+            "c c c c c c c c c c c c"
+            "f f f f f f f f f f f f";
+    }
+}
+
+/* --------------------------------------------------------------------------- */
+
+
+/* other */
+.msg {
+    color: rgb(35, 185, 21);
+}
+
+.headerH1 {
+    text-align: center;
+    font-family: headerFont;
+    color: #00FFFF;
+}
+
+
+.headerH1 {
+    text-align: center;
+    font-family: headerFont;
+}
+
+.headerH1:hover {
+    color: #7ac264;
+    text-align: center;
+    font-family: headerFont;
+}
+
+#footer {
+    color: #00FFFF;
+    font-family: headerFont;
+    font-size: larger;
+}
