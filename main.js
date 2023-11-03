@@ -171,6 +171,8 @@ function createCards() {
         deleteBtn.setAttribute("class", "bi bi-x-circle-fill btnClass")
         editBtn.setAttribute("class", "bi bi-pencil-square btnClass")
         editBtn.setAttribute("id", "editBtn")
+        editBtn.style.display = "none"
+        deleteBtn.style.display = "none"
         // set data into cells
         cardFirstName.innerHTML = item.firstName
         cardLastName.innerHTML = item.lastName
@@ -186,6 +188,28 @@ function createCards() {
         editBtn.addEventListener("click", function () {
             editUser(item)
         })
+
+        // buttons appearance -----------------------------------------------------------
+        //mouseOver function to show the button
+        function mouseOver() {
+            editBtn.style.display = "inline";
+            deleteBtn.style.display = "inline";
+        }
+
+        //mouseOut function to hide the button
+        function mouseOut() {
+            editBtn.style.display = "none";
+            deleteBtn.style.display = "none";
+        }
+        // Add mouseenter event listener to the divElement (the card)
+        divElement.addEventListener("mouseenter", mouseOver)
+        // Add mouseleave event listener to the divElement (the card)
+        divElement.addEventListener("mouseleave", mouseOut);
+
+        // -----------------------------------------------------------
+
+        
+        editBtn.addEventListener("mouseenter", mouseOver)
         // append elements to our main divCards
         divElement.appendChild(deleteBtn)
         divElement.appendChild(editBtn)
@@ -197,5 +221,6 @@ function createCards() {
         divCards.prepend(divElement)
     }
 }
+
 
 
