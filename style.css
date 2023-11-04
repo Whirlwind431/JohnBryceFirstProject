@@ -1,7 +1,9 @@
 html,
 body {
-    height: 100%;
+    height: 100vh;
     margin: 0;
+    overflow-y:scroll;
+
 }
 
 /* text style in each card */
@@ -12,12 +14,15 @@ body {
 /* Css for each card */
 .divCard {
     border: 1px solid #000;
+    height: 250px;
     width: 200px;
-    border-radius: 15%;
+    border-radius: 10% 5% 5% 10% ;
     margin: 30px;
     font-family: myFont;
     padding: 10px;
     background-image: linear-gradient(10deg, #A9F1DF, #FFBBBB);
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .divCard:hover {
