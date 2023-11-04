@@ -16,6 +16,7 @@
     const msgTimeInput = document.getElementById("msgTimeInput");
     const msgTextarea = document.getElementById("msgTextarea");
 
+
     // buttons
     const submitBtn = document.getElementById("submitBtn")
     const saveBtn = document.getElementById("saveBtn")
@@ -23,6 +24,19 @@
 
     // Run iur website
     webInit()
+
+    //Function task's create time
+    function today() {
+        let currentDate = new Date();
+        let dateTime = currentDate.getDate() + "/"
+            + (currentDate.getMonth() + 1) + "/"
+            + currentDate.getFullYear() + " <br> "
+            + currentDate.getHours() + ":"
+            + currentDate.getMinutes() + ":"
+            + currentDate.getSeconds();
+        return dateTime;
+    }
+
 
     // input validation 
     function checkInputIsLegal(obj) {
@@ -61,10 +75,10 @@
             date: dateInput.value,
             time: timeInput.value,
             description: textarea.value,
+            currentTime: today()
         }
         return task
     }
-
 
     // main func - to add new task 
     function addNewTask() {
@@ -121,6 +135,7 @@
         item.date = dateInput.value
         item.time = timeInput.value
         item.description = textarea.value
+        item.currentTime = today()
         if (checkInputIsLegal(item)) {
             createCards()
             const stringifynewTask = JSON.stringify(arr)
@@ -152,6 +167,7 @@
     // create  cards
     function createCards() {
         divCards.innerHTML = ""
+
         for (const item of arr) {
             const taskIndex = arr.indexOf(item);
             const divElement = document.createElement('div')
@@ -160,14 +176,16 @@
             const cardTimeInput = document.createElement('p')
             const cardHorizLine = document.createElement('hr')
             const cardTextarea = document.createElement('p')
+            const cardTimeCreation = document.createElement('p')
             const deleteBtn = document.createElement('i')
             const editBtn = document.createElement('i')
             // css 
-            divElement.setAttribute("class", "divCard")
+            divElement.setAttribute("class", "divCard fade-in-image" )
             cardTextInput.setAttribute("class", "inputData")
             cardDateInput.setAttribute("class", "inputData")
             cardTimeInput.setAttribute("class", "inputData")
             cardTextarea.setAttribute("class", "inputData")
+            cardTimeCreation.setAttribute("class", "inputData")
             deleteBtn.setAttribute("class", "bi bi-x-circle-fill btnClass")
             editBtn.setAttribute("class", "bi bi-pencil-square btnClass")
             editBtn.setAttribute("id", "editBtn")
@@ -178,6 +196,7 @@
             cardDateInput.innerHTML = `date: ${item.date}`
             cardTimeInput.innerHTML = `time: ${item.time}`
             cardTextarea.innerHTML = `description: ${item.description}`
+            cardTimeCreation.innerHTML = `task time creation ${item.currentTime}`
             deleteBtn.innerHTML = ""
             // buttons
             deleteBtn.addEventListener("click", function () {
@@ -218,7 +237,9 @@
             divElement.appendChild(cardTimeInput)
             divElement.appendChild(cardHorizLine)
             divElement.appendChild(cardTextarea)
+            divElement.appendChild(cardTimeCreation)
             divCards.prepend(divElement)
+
         }
     }
 

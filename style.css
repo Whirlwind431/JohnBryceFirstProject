@@ -2,7 +2,8 @@ html,
 body {
     height: 100vh;
     margin: 0;
-    overflow-y:scroll;
+    overflow: hidden;
+    overflow-y: auto;
 
 }
 
@@ -16,14 +17,14 @@ body {
 .divCard {
     border: 1px solid #000;
     height: 250px;
-    width: 200px;
-    border-radius: 15% 2% 2% 15% ;
+    width: 220px;
+    border-radius: 15% 2% 2% 15%;
     margin: 30px;
     font-family: myFont;
     padding: 10px;
     background-image: linear-gradient(10deg, #A9F1DF, #FFBBBB);
-    overflow: hidden;
     overflow-y: scroll;
+    overflow-wrap: break-word;
 }
 
 .divCard:hover {
@@ -178,4 +179,68 @@ i {
     color: #00FFFF;
     font-family: headerFont;
     font-size: larger;
+}
+
+
+/* ------------------------- fade in  */
+
+
+
+.fade-in-image {
+    -webkit-animation: fadein 2s;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s;
+    /* Firefox < 16 */
+    -ms-animation: fadein 2s;
+    /* Internet Explorer */
+    -o-animation: fadein 2s;
+    /* Opera < 12.1 */
+    animation: fadein 2s;
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.99;
+    }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.99;
+    }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+
+    }
+
+    to {
+        opacity: 0.99;
+    }
+}
+
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+
 }
