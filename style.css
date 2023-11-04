@@ -7,8 +7,9 @@ body {
 }
 
 /* text style in each card */
-.firstName {
+.inputData {
     text-align: center;
+    font-size: larger;
 }
 
 /* Css for each card */
@@ -16,7 +17,7 @@ body {
     border: 1px solid #000;
     height: 250px;
     width: 200px;
-    border-radius: 10% 5% 5% 10% ;
+    border-radius: 15% 2% 2% 15% ;
     margin: 30px;
     font-family: myFont;
     padding: 10px;
@@ -101,7 +102,7 @@ i {
     grid-area: h;
 }
 
-#cards {
+#tasks {
     grid-area: c;
     height: 100%;
 
@@ -112,7 +113,7 @@ i {
     grid-area: f;
 }
 
-#cards {
+#tasks {
     display: flex;
     justify-content: center;
     align-items: center;

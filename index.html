@@ -15,46 +15,47 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./main.js" defer></script>
 </head>
+
 <body>
     <div id="container">
         <div id="formDiv">
-            <form action="" id="formVar">
+            <form id="formVar">
                 <caption>
-                    <h1 class="headerH1">Add new user</h1>
-                </caption>
+                    <h1 class="headerH1">Add New Task</h1>
+                </caption><br>
                 <div class="input-group mb-3">
-                    <span class="input-group-text ">First Name:</span>
-                    <input type="text" class="form-control " placeholder="First Name" id="firstName">
+                    <span class="input-group-text ">Task Title:</span>
+                    <input type="text" class="form-control" placeholder="Task Title:" id="textInput">
                 </div>
-                <div id="msgFirstNameInput" class="msg"></div>
+                <div id="msgTextInput" class="msg"></div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text">Last Name:</span>
-                    <input type="text" class="form-control" placeholder="Last Name" id="lastName">
+                    <span class="input-group-text">Due Date:</span>
+                    <input type="date" class="form-control" id="dateInput">
                 </div>
-                <div id="msgLastNameInput" class="msg"></div>
+                <div id="msgDateInput" class="msg"></div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text">Age:</span>
-                    <input type="text" class="form-control" placeholder="Age" id="age">
+                    <span class="input-group-text">Due Time:</span>
+                    <input type="time" class="form-control" id="timeInput">
                 </div>
-                <div id="msgAgeInput" class="msg"></div>
+                <div id="msgTimeInput" class="msg"></div>
                 <div class="input-group mb-3">
-                    <span class="input-group-text">Email:</span>
-                    <input type="text" class="form-control" placeholder="Email" id="email">
+                    <span class="input-group-text">Description:</span>
+                    <input type="text" class="form-control" placeholder="Description" id="textarea" cols="30" rows="3">
                 </div>
-                <div id="msgEmailInput" class="msg"></div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Phone:</span>
-                    <input type="text" class="form-control" placeholder="Phone" id="phone">
-                </div>
-                <div id="msgPhoneInput" class="msg"></div>
-                <button type="button" class="btn btn-primary" onclick="addNewUser() " id="submitBtn">submit</button>
-                <button type="submit" hidden id="saveBtn" >save</button>
-            </form>
-        </div>
-        <div id="cards">
-        </div>
-        <footer  id="footer">&copy; Vladislav Nikishov</footer>
+                <div id="msgTextarea" class="msg"></div>
+                <button type="button" class="btn btn-primary" id="submitBtn">add task</button>
+                <button type="button" class="btn btn-primary" id="clearBtn">clear form</button>
+                <button type="submit" hidden id="saveBtn">save</button>
 
+            </form>
+
+        </div>
+
+        <div id="tasks">
+        </div>
+
+        <footer id="footer">&copy; Vladislav Nikishov</footer>
+    </div>
 </body>
 
-</html>cd
+</html>

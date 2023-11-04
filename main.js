@@ -4,35 +4,33 @@
 
     //variables
     let arr = []
-    let firstName = document.getElementById("firstName")
-    let lastName = document.getElementById("lastName")
-    let age = document.getElementById("age")
-    let email = document.getElementById("email")
-    let phone = document.getElementById("phone")
-    const msgFirstNameInput = document.getElementById("msgFirstNameInput")
-    const msgLastNameInput = document.getElementById("msgLastNameInput")
-    const msgAgeInput = document.getElementById("msgAgeInput")
-    const msgEmailInput = document.getElementById("msgEmailInput")
-    const msgPhoneInput = document.getElementById("msgPhoneInput")
+    const formVar = document.getElementById("formVar")
+    const divCards = document.getElementById("tasks")
 
-    let formVar = document.getElementById("formVar")
-    const divCards = document.getElementById("cards")
-    let submitBtn = document.getElementById("submitBtn")
-    let saveBtn = document.getElementById("saveBtn")
+    const textInput = document.getElementById("textInput");
+    const dateInput = document.getElementById("dateInput");
+    const timeInput = document.getElementById("timeInput");
+    const textarea = document.getElementById("textarea");
+    const msgTextInput = document.getElementById("msgTextInput");
+    const msgDateInput = document.getElementById("msgDateInput");
+    const msgTimeInput = document.getElementById("msgTimeInput");
+    const msgTextarea = document.getElementById("msgTextarea");
+
+    // buttons
+    const submitBtn = document.getElementById("submitBtn")
+    const saveBtn = document.getElementById("saveBtn")
+    const clearBtn = document.getElementById("clearBtn")
 
     // Run iur website
     webInit()
 
     // input validation 
     function checkInputIsLegal(obj) {
-        msgFirstNameInput.innerHTML = obj.firstName ? '' : "Please fill the first name"
-        msgLastNameInput.innerHTML = obj.lastName ? '' : "Please fill the last name"
-        msgAgeInput.innerHTML = obj.age ? '' : "Please fill the age"
-
-        msgEmailInput.innerHTML = obj.email ? '' : "Please fill the email"
-
-        msgPhoneInput.innerHTML = obj.phone ? '' : "Please fill the phone"
-        if (!obj.firstName || !obj.lastName || !obj.age || !obj.email || !obj.phone) {
+        msgTextInput.innerHTML = obj.text ? '' : "Please fill the task title"
+        msgDateInput.innerHTML = obj.date ? '' : "Please fill the due date"
+        msgTimeInput.innerHTML = obj.time ? '' : "Please fill the due time"
+        msgTextarea.innerHTML = obj.description ? '' : "Please fill the description task"
+        if (!obj.text || !obj.date || !obj.time || !obj.description) {
             return false
         } else {
             return true
@@ -40,39 +38,40 @@
     }
 
     // Function not refreshing for page
-    formVar.addEventListener("click", (event) => {
+    formVar.addEventListener("submit", (event) => {
         event.preventDefault();
     });
 
     // function for running and refreshing website
     function webInit() {
-        if (localStorage.getItem('users')) {
-            const strUsers = localStorage.getItem('users')
-            arr = JSON.parse(strUsers)
+        if (localStorage.getItem('tasks')) {
+            const strTasks = localStorage.getItem('tasks')
+            arr = JSON.parse(strTasks)
         } else {
             arr = []
         }
         createCards()
     }
 
-    // format for our user (obj)
-    function addNewUserObj() {
-        const user = {
-            firstName: firstName.value,
-            lastName: lastName.value,
-            age: age.value,
-            email: email.value,
-            phone: phone.value
+
+    // format for our task (obj)
+    function addNewTaskObj() {
+        const task = {
+            text: textInput.value,
+            date: dateInput.value,
+            time: timeInput.value,
+            description: textarea.value,
         }
-        return user
+        return task
     }
 
-    // main func - to add new user 
-    function addNewUser() {
-        const newUser = addNewUserObj()
-        const validation = checkInputIsLegal(newUser)
+
+    // main func - to add new task 
+    function addNewTask() {
+        const newTask = addNewTaskObj()
+        const validation = checkInputIsLegal(newTask)
         if (validation) {
-            addNewUserToLocalStorage(newUser)
+            addNewTaskToLocalStorage(newTask)
             clearInputValue()
             webInit()
         }
@@ -80,52 +79,52 @@
 
     // clear input 
     function clearInputValue() {
-        firstName.value = ""
-        lastName.value = ""
-        age.value = ""
-        email.value = ""
-        phone.value = ""
+        textInput.value = ""
+        dateInput.value = ""
+        timeInput.value = ""
+        textarea.value = ""
 
         // clear msg
-        msgFirstNameInput.value = ""
-        msgLastNameInput.value = ""
-        msgAgeInput.value = ""
-        msgEmailInput.value = ""
-        msgPhoneInput.value = ""
+        msgTextInput.value = ""
+        msgDateInput.value = ""
+        msgTimeInput.value = ""
+        msgTextarea.value = ""
     }
 
     // adding to local storage
-    function addNewUserToLocalStorage(newUser) {
-        arr.push(newUser)
+    function addNewTaskToLocalStorage(newTask) {
+        arr.push(newTask)
         // console.log(arr);
-        const stringifyNewUser = JSON.stringify(arr)
-        localStorage.setItem("users", stringifyNewUser)
+        const stringifynewTask = JSON.stringify(arr)
+        localStorage.setItem("tasks", stringifynewTask)
     }
 
-    //get our users from the local storage 
-    function updateUsetToLocalStorage() {
-        const stringifyNewUser = JSON.stringify(arr)
-        localStorage.setItem("users", stringifyNewUser)
+    //get our tasks from the local storage 
+    function updateTasksToLocalStorage() {
+        const stringifynewTask = JSON.stringify(arr)
+        localStorage.setItem("tasks", stringifynewTask)
     }
 
     // delete button
-    function deleteUser(index) {
+    function deleteTask(index) {
         arr.splice(index, 1);
-        updateUsetToLocalStorage()
-        webInit()
+        let result = confirm("Want to delete?");
+        if (result) {
+            updateTasksToLocalStorage()
+            webInit()
+        }
     }
 
     //save button
     function saveBtnFunc(item) {
-        item.firstName = firstName.value
-        item.lastName = lastName.value
-        item.age = age.value
-        item.email = email.value
-        item.phone = phone.value
+        item.text = textInput.value
+        item.date = dateInput.value
+        item.time = timeInput.value
+        item.description = textarea.value
         if (checkInputIsLegal(item)) {
             createCards()
-            const stringifyNewUser = JSON.stringify(arr)
-            localStorage.setItem("users", stringifyNewUser)
+            const stringifynewTask = JSON.stringify(arr)
+            localStorage.setItem("tasks", stringifynewTask)
             saveBtn.setAttribute("hidden", "true")
             submitBtn.removeAttribute("hidden", "true")
             window.location.reload()
@@ -133,18 +132,16 @@
     }
 
     //edit btn
-    function editUser(item) {
-
+    function editTask(item) {
         console.log("Button was clicked. 👌❤️");
         submitBtn.setAttribute("hidden", "true")
         saveBtn.removeAttribute("hidden", "true")
         saveBtn.setAttribute("class", "btn btn-success")
         // put in input
-        firstName.value = item.firstName
-        lastName.value = item.lastName
-        age.value = item.age
-        email.value = item.email
-        phone.value = item.phone
+        textInput.value = item.text
+        dateInput.value = item.date
+        timeInput.value = item.time
+        textarea.value = item.description
         console.log(item)
         saveBtn.addEventListener("click", function () {
             saveBtnFunc(item)
@@ -152,48 +149,47 @@
 
     }
 
-    // create users cards
+    // create  cards
     function createCards() {
         divCards.innerHTML = ""
         for (const item of arr) {
-            const userIndex = arr.indexOf(item);
+            const taskIndex = arr.indexOf(item);
             const divElement = document.createElement('div')
-            const cardFirstName = document.createElement('p')
-            const cardLastName = document.createElement('p')
-            const cardAge = document.createElement('p')
-            const cardEmail = document.createElement('p')
-            const cardPhone = document.createElement('p')
+            const cardTextInput = document.createElement('p')
+            const cardDateInput = document.createElement('p')
+            const cardTimeInput = document.createElement('p')
+            const cardHorizLine = document.createElement('hr')
+            const cardTextarea = document.createElement('p')
             const deleteBtn = document.createElement('i')
             const editBtn = document.createElement('i')
             // css 
             divElement.setAttribute("class", "divCard")
-            cardFirstName.setAttribute("class", "firstName")
-            cardLastName.setAttribute("class", "firstName")
-            cardAge.setAttribute("class", "firstName")
-            cardEmail.setAttribute("class", "firstName")
-            cardPhone.setAttribute("class", "firstName")
+            cardTextInput.setAttribute("class", "inputData")
+            cardDateInput.setAttribute("class", "inputData")
+            cardTimeInput.setAttribute("class", "inputData")
+            cardTextarea.setAttribute("class", "inputData")
             deleteBtn.setAttribute("class", "bi bi-x-circle-fill btnClass")
             editBtn.setAttribute("class", "bi bi-pencil-square btnClass")
             editBtn.setAttribute("id", "editBtn")
             editBtn.style.display = "none"
             deleteBtn.style.display = "none"
             // set data into cells
-            cardFirstName.innerHTML = item.firstName
-            cardLastName.innerHTML = item.lastName
-            cardAge.innerHTML = item.age
-            cardEmail.innerHTML = item.email
-            cardPhone.innerHTML = item.phone
+            cardTextInput.innerHTML = `Task: ${item.text}`
+            cardDateInput.innerHTML = `date: ${item.date}`
+            cardTimeInput.innerHTML = `time: ${item.time}`
+            cardTextarea.innerHTML = `description: ${item.description}`
             deleteBtn.innerHTML = ""
             // buttons
             deleteBtn.addEventListener("click", function () {
-                deleteUser(userIndex)
+                deleteTask(taskIndex)
                 console.log(arr);
             })
             editBtn.addEventListener("click", function () {
-                editUser(item)
+                editTask(item)
             })
 
             // buttons appearance -----------------------------------------------------------
+
             //mouseOver function to show the button
             function mouseOver() {
                 editBtn.style.display = "inline";
@@ -207,25 +203,29 @@
             }
             // Add mouseenter event listener to the divElement (the card)
             divElement.addEventListener("mouseenter", mouseOver)
+
             // Add mouseleave event listener to the divElement (the card)
             divElement.addEventListener("mouseleave", mouseOut);
 
             // -----------------------------------------------------------
 
-
             editBtn.addEventListener("mouseenter", mouseOver)
             // append elements to our main divCards
             divElement.appendChild(deleteBtn)
             divElement.appendChild(editBtn)
-            divElement.appendChild(cardFirstName)
-            divElement.appendChild(cardLastName)
-            divElement.appendChild(cardAge)
-            divElement.appendChild(cardEmail)
-            divElement.appendChild(cardPhone)
+            divElement.appendChild(cardTextInput)
+            divElement.appendChild(cardDateInput)
+            divElement.appendChild(cardTimeInput)
+            divElement.appendChild(cardHorizLine)
+            divElement.appendChild(cardTextarea)
             divCards.prepend(divElement)
         }
     }
 
 
+    // add func, delete func for our form
+    submitBtn.addEventListener("click", () => addNewTask())
+
+    clearBtn.addEventListener("click", () => clearInputValue())
 
 })()
