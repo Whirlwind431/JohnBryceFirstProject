@@ -61,11 +61,26 @@
         if (localStorage.getItem('tasks')) {
             const strTasks = localStorage.getItem('tasks')
             arr = JSON.parse(strTasks)
+
         } else {
             arr = []
+
         }
         createCards()
+        nothingToDo()
     }
+
+
+    function nothingToDo() {
+        if (!arr || arr.length === 0) {
+            const header = document.createElement("h2")
+            header.style.color = ("color", "white")
+            header.style.fontFamily = "Verdana";
+            header.innerHTML = "Nothing to do!😴💤"
+            divCards.appendChild(header)
+        }
+    }
+
 
 
     // format for our task (obj)
@@ -238,7 +253,7 @@
                     cardTimeInput.style.textDecoration = "line-through"
                     cardTextarea.style.textDecoration = "line-through"
                     cardTimeCreation.style.textDecoration = "line-through"
-                }else{
+                } else {
                     cardTextInput.style.textDecoration = "none"
                     cardDateInput.style.textDecoration = "none"
                     cardTimeInput.style.textDecoration = "none"
@@ -248,7 +263,7 @@
             }
             checkboxBtn.addEventListener("click", () => ifChecked())
 
-          
+
 
             // Add mouseenter event listener to the divElement (the card)
             divElement.addEventListener("mouseenter", mouseOver)
