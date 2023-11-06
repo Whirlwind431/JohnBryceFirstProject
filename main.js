@@ -80,7 +80,7 @@
         return task
     }
 
-    // main func - to add new task 
+    // main func - to add new task   
     function addNewTask() {
         const newTask = addNewTaskObj()
         const validation = checkInputIsLegal(newTask)
@@ -177,20 +177,26 @@
             const cardHorizLine = document.createElement('hr')
             const cardTextarea = document.createElement('p')
             const cardTimeCreation = document.createElement('p')
+            const checkboxBtn = document.createElement("INPUT")
             const deleteBtn = document.createElement('i')
             const editBtn = document.createElement('i')
+
             // css 
-            divElement.setAttribute("class", "divCard fade-in-image" )
+            divElement.setAttribute("class", "divCard fade-in-image")
             cardTextInput.setAttribute("class", "inputData")
             cardDateInput.setAttribute("class", "inputData")
             cardTimeInput.setAttribute("class", "inputData")
             cardTextarea.setAttribute("class", "inputData")
             cardTimeCreation.setAttribute("class", "inputData")
             deleteBtn.setAttribute("class", "bi bi-x-circle-fill btnClass")
+            checkboxBtn.setAttribute("class", "btnClass")
             editBtn.setAttribute("class", "bi bi-pencil-square btnClass")
             editBtn.setAttribute("id", "editBtn")
+            checkboxBtn.setAttribute("type", "checkbox")
             editBtn.style.display = "none"
             deleteBtn.style.display = "none"
+            checkboxBtn.style.display = "none"
+
             // set data into cells
             cardTextInput.innerHTML = `Task: ${item.text}`
             cardDateInput.innerHTML = `date: ${item.date}`
@@ -198,6 +204,7 @@
             cardTextarea.innerHTML = `description: ${item.description}`
             cardTimeCreation.innerHTML = `task time creation ${item.currentTime}`
             deleteBtn.innerHTML = ""
+
             // buttons
             deleteBtn.addEventListener("click", function () {
                 deleteTask(taskIndex)
@@ -213,13 +220,36 @@
             function mouseOver() {
                 editBtn.style.display = "inline";
                 deleteBtn.style.display = "inline";
+                checkboxBtn.style.display = "inline"
             }
 
             //mouseOut function to hide the button
             function mouseOut() {
                 editBtn.style.display = "none";
                 deleteBtn.style.display = "none";
+                checkboxBtn.style.display = "none";
             }
+
+            // function if checked 
+            function ifChecked() {
+                if (checkboxBtn.checked === true) {
+                    cardTextInput.style.textDecoration = "line-through"
+                    cardDateInput.style.textDecoration = "line-through"
+                    cardTimeInput.style.textDecoration = "line-through"
+                    cardTextarea.style.textDecoration = "line-through"
+                    cardTimeCreation.style.textDecoration = "line-through"
+                }else{
+                    cardTextInput.style.textDecoration = "none"
+                    cardDateInput.style.textDecoration = "none"
+                    cardTimeInput.style.textDecoration = "none"
+                    cardTextarea.style.textDecoration = "none"
+                    cardTimeCreation.style.textDecoration = "none"
+                }
+            }
+            checkboxBtn.addEventListener("click", () => ifChecked())
+
+          
+
             // Add mouseenter event listener to the divElement (the card)
             divElement.addEventListener("mouseenter", mouseOver)
 
@@ -232,6 +262,7 @@
             // append elements to our main divCards
             divElement.appendChild(deleteBtn)
             divElement.appendChild(editBtn)
+            divElement.appendChild(checkboxBtn)
             divElement.appendChild(cardTextInput)
             divElement.appendChild(cardDateInput)
             divElement.appendChild(cardTimeInput)
